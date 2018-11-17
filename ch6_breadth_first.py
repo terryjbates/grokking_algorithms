@@ -17,16 +17,18 @@ def main():
     graph['peggy'] = []
     graph['thom'] = []
     graph['jonny'] = []
+    graph['tom'] = ['you']
 
     search_queue = deque()
     search_queue += graph["you"]
 
     while search_queue:
         person = search_queue.popleft()
-        if person_is_seller(person):
+        if person_is_seller(person) and person not in seen_people:
             print("{} sells MANGOOOO!".format(person))
             return True
         else:
+            seen_people.add(person)
             search_queue += graph[person]
     return False
 
